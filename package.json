@@ -1,0 +1,28 @@
+{
+  "private": "true",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zjffun/learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zjffun/learn/issues"
+  },
+  "homepage": "https://github.com/zjffun/learn#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-template": "^5.0.0",
+    "gulp-webserver": "^0.9.1",
+    "lodash": "^4.17.21"
+  }
+}

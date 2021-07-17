@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/railroad-diagrams@1.0.0/railroad-diagrams.css"
+    />
+    <style>
+      .uri {
+        font-size: 2em;
+      }
+      svg.railroad-diagram rect.actvie {
+        fill: violet;
+      }
+      .uri span.active {
+        background: violet;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="uri">
+      <pre><span data-part="scheme">http</span>://<span data-part="userinfo">username:password</span>@<span data-part="host">example.com</span>:<span data-part="port">8848</span><span data-part="path">/foo/bar</span>?<span data-part="query">kw=foo</span>#<span data-part="fragment">fragment1</span></pre>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/railroad-diagrams@1.0.0/railroad-diagrams.js"></script>
+    <script>
+      Diagram(
+        Sequence("scheme", ":"),
+        Choice(
+          0,
+          Skip(),
+          Sequence(
+            "//",
+            Choice(0, Skip(), Sequence("userinfo", "@")),
+            "host",
+            Choice(0, Skip(), Sequence(":", "port"))
+          )
+        ),
+        Sequence("path"),
+        Choice(0, Skip(), Sequence("?", "query")),
+        Choice(0, Skip(), Sequence("#", "fragment"))
+      ).addTo();
+
+      const uriEL = document.querySelector(".uri");
+      const uriSpanEl = uriEL.querySelectorAll("span");
+      const railroadDiagramEl = document.querySelector(".railroad-diagram");
+      const railroadDiagramTextEls = railroadDiagramEl.querySelectorAll("text");
+
+      uriEL.addEventListener("mouseover", (e) => {
+        const target = e.target;
+        uriSpanEl.forEach((el) => el.classList.remove("active"));
+        target.classList.add("active");
+
+        if (target.dataset?.part) {
+          railroadDiagramTextEls.forEach((rtel) => {
+            if (rtel.textContent === target.dataset.part) {
+              rtel.previousElementSibling.classList.add("actvie");
+              return;
+            }
+            rtel.previousElementSibling.classList.remove("actvie");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
