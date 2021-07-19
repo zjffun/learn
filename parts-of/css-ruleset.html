@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #currentname {
+        font-size: 2em;
+        height: 1em;
+        color: violet;
+      }
+      .css-ruleset {
+        font-size: 2em;
+      }
+      /* .css-ruleset span {
+        background: green;
+      }
+      .css-ruleset span span {
+        background: yellow;
+      }
+      .css-ruleset span span span {
+        background: yellowgreen;
+      }
+      .css-ruleset span span span span {
+        background: blueviolet;
+      } */
+      .css-ruleset span.active {
+        background: violet;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="currentname"></p>
+    <pre class="css-ruleset">
+<span data-part="Selector">.container p</span><span data-part="Pseudo-Class">:first-child</span><span data-part="Pseudo-Element">::first-letter</span> <span data-part="Declaration-Block">{
+  <span data-part="Declaration"><span data-part="Property">color</span>: <span data-part="Value">#000</span>;</span> 
+  <span data-part="Declaration"><span data-part="Property">font-size</span>: <span data-part="Value">24px</span>;</span>
+  <span data-part="Declaration"><span data-part="Property">text-transform</span>: <span data-part="Value">uppercase</span>;</span>
+}</span></pre>
+
+    <script>
+      const preEL = document.querySelector(".css-ruleset");
+      const preSpanEl = preEL.querySelectorAll("span");
+      console.log(preSpanEl);
+
+      preEL.addEventListener("mouseover", (e) => {
+        const target = e.target;
+
+        if (target.dataset?.part) {
+          preSpanEl.forEach((el) => el.classList.remove("active"));
+          target.classList.add("active");
+          currentname.textContent = target.dataset?.part;
+        }
+      });
+    </script>
+  </body>
+</html>
